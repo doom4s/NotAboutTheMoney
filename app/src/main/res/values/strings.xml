@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">Loot</string>
+    <string name="allCurrenciesUrl">https://openexchangerates.org/api/currencies.json</string>
+</resources>
