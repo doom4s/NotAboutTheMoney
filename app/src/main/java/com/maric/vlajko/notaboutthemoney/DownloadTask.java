@@ -1,24 +1,16 @@
 package com.maric.vlajko.notaboutthemoney;
 
 import android.os.AsyncTask;
-import android.util.JsonToken;
-import android.util.Log;
 import android.widget.ProgressBar;
-import android.widget.Toast;
-
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-import org.json.JSONTokener;
-
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.Iterator;
-import java.util.Objects;
-import java.util.Set;
 
 /**
  * Created by Vlajko on 09-Feb-16.
