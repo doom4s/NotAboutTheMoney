@@ -3,6 +3,7 @@ package com.maric.vlajko.notaboutthemoney;
 import android.os.AsyncTask;
 import android.util.JsonToken;
 import android.util.Log;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import org.json.JSONArray;
@@ -22,11 +23,13 @@ import java.util.Set;
 /**
  * Created by Vlajko on 09-Feb-16.
  */
-public class DownloadTask extends AsyncTask<String,MainActivity,String> {
+public class DownloadTask extends AsyncTask<String,Integer,String> {
 
     private LoadComplete complete;
-    public DownloadTask(LoadComplete complete){
+    private ProgressBar progressBar;
+    public DownloadTask(LoadComplete complete, ProgressBar progressBar){
         this.complete = complete;
+        this.progressBar = progressBar;
     }
 
     @Override
@@ -72,5 +75,10 @@ public class DownloadTask extends AsyncTask<String,MainActivity,String> {
             e.printStackTrace();
         }
 
+    }
+
+    @Override
+    protected void onProgressUpdate(Integer... values) {
+        super.onProgressUpdate(values);
     }
 }
