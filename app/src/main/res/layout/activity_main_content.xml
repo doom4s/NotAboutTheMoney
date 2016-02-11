@@ -79,4 +79,15 @@
         android:layout_marginBottom="15dp"
         android:layout_alignLeft="@+id/convertButton"
         android:layout_alignStart="@+id/convertButton" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Large Text"
+        android:textSize="38sp"
+        android:id="@+id/currency"
+        android:layout_below="@+id/myResult"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
+
 </RelativeLayout>

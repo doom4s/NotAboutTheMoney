@@ -1,6 +1,8 @@
 package com.maric.vlajko.notaboutthemoney;
 
 import android.os.AsyncTask;
+import android.util.Log;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 import java.io.IOException;
@@ -21,7 +23,6 @@ public class DataVersionCheck extends AsyncTask<String, String, String> {
     @Override
     protected String doInBackground(String... urls) {
         String result = "";
-        if(MyCurrencyObjArray.timeStamp!="") {
             URL url;
             HttpURLConnection urlConnection = null;
             try {
@@ -40,32 +41,35 @@ public class DataVersionCheck extends AsyncTask<String, String, String> {
             } catch (IOException e) {
                 e.printStackTrace();
             }
-        }
+
         return result;
     }
     @Override
     protected void onPostExecute(String result) {
         super.onPostExecute(result);
-        if(result!=""){
+
         final String result1 = result;
+            Log.i("DATA",MyCurrencyObjArray.timeStamp);
         new Thread(new Runnable(){
             @Override
             public void run() {
                 try {
                     JSONObject jsonObject = new JSONObject(result1);
-                    if(MyCurrencyObjArray.timeStamp==jsonObject.get("timestamp").toString()){
-                        isNew = false;
-                    }else{isNew = true;}
+                    Log.i("OVDEPRIMETI",MyCurrencyObjArray.timeStamp+" : "+jsonObject.getString("timestamp").toString());
+                    if(MyCurrencyObjArray.timeStamp==jsonObject.getString("timestamp").toString()){
+                        isNew = true;
+
+                    }else{isNew = false;}
                 } catch(JSONException e) {
                     e.printStackTrace();
                 }
             }
-        }).start();}
-
+        }).start();
+        Log.i("ISNEW",String.valueOf(isNew));
         if(isNew){
-            complete.asyncComplete3(true);
+            complete.asyncComplete3(isNew);
         }else {
-            complete.asyncComplete3(false);
+            complete.asyncComplete3(isNew);
         }
     }
 }

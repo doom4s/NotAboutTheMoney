@@ -11,4 +11,5 @@
     <string name="noNetwork">Network is offline.Program cannot fetch latest monetary data.</string>
     <string name="noAmount">Please enter amount to convert.</string>
     <string name="dataUpdatedAndSaved">Data updated and saved.</string>
+    <string name="networkOffline">Network is offline.When online, tap the screen or restart the app to load initial data.</string>
 </resources>

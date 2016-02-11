@@ -6,6 +6,7 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.PersistableBundle;
 import android.preference.PreferenceManager;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
@@ -42,14 +43,18 @@ public class MainActivity extends RoboActionBarActivity implements LoadComplete{
     TextView myResult;
     @InjectView(R.id.equal)
     TextView equal;
+    @InjectView(R.id.currency)
+    TextView currencyTextView;
     ArrayAdapter<String> adapter;
     private String url1,url2;
     float number1,number2,amount;
     static ArrayList <String> countriesList = new ArrayList<>();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        currencyTextView.setVisibility(currencyTextView.GONE);
         myResult.setVisibility(myResult.GONE);
         equal.setVisibility(equal.GONE);
         adapter = new ArrayAdapter<>(getApplicationContext(),android.R.layout.simple_dropdown_item_1line, countriesList);
@@ -137,6 +142,8 @@ public class MainActivity extends RoboActionBarActivity implements LoadComplete{
                 myResult.setText(Float.toString(amount));
                 equal.setVisibility(equal.VISIBLE);
                 myResult.setVisibility(myResult.VISIBLE);
+                    currencyTextView.setText(whatWeConvertInto.getText());
+                    currencyTextView.setVisibility(currencyTextView.VISIBLE);
                 }else {Toast.makeText(getApplicationContext(),getResources().getString(R.string.noAmount),Toast.LENGTH_SHORT).show();}
 
 
@@ -151,7 +158,8 @@ public class MainActivity extends RoboActionBarActivity implements LoadComplete{
             } else {
                 Toast.makeText(getApplicationContext(), getResources().getString(R.string.noNetwork), Toast.LENGTH_LONG).show();
             }
-        }else{loadData();
+        }else{
+            loadData();
         if(isOnline()){
             checkVersion();
         }
@@ -175,7 +183,7 @@ public class MainActivity extends RoboActionBarActivity implements LoadComplete{
 
     @Override
     public void asyncComplete3(boolean success) {
-        if(success){
+        if(!success){
         DownloadRelationTask relationTask = new DownloadRelationTask(this);
         relationTask.execute(url2);}
         else {Toast.makeText(getApplicationContext(),"Data is up to date.",Toast.LENGTH_SHORT).show();}
@@ -221,6 +229,23 @@ public class MainActivity extends RoboActionBarActivity implements LoadComplete{
     }
     private void checkVersion(){
         DataVersionCheck versionCheck = new DataVersionCheck(this);
-        versionCheck.execute(url1);
+        versionCheck.execute(url2);
+    }
+
+    @Override
+    public void onSaveInstanceState(Bundle outState, PersistableBundle outPersistentState) {
+        super.onSaveInstanceState(outState, outPersistentState);
+        outState.putString("CurrentAmount",editTextAmount.getText().toString());
+        outState.putString("CurrencyOne",whatWeConvert.getText().toString());
+        outState.putString("CurrencyTwo",whatWeConvertInto.getText().toString());
+    }
+
+    @Override
+    protected void onRestoreInstanceState(Bundle savedInstanceState) {
+        super.onRestoreInstanceState(savedInstanceState);
+        editTextAmount.setText(savedInstanceState.getString("CurrentAmount"));
+        whatWeConvert.setText(savedInstanceState.getString("CurrencyOne"));
+        whatWeConvertInto.setText(savedInstanceState.getString("CurrencyTwo"));
+        convertButton.setEnabled(true);
     }
 }
