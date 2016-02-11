@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_centerInParent="true"
+    android:id="@+id/myRelativeLayout"
+    android:padding="10dp"
+    android:layout_height="match_parent">
+    <AutoCompleteTextView
+        android:layout_width="match_parent"
+        android:layout_margin="10dp"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:popupBackground="@color/colorAccent"
+        android:hint="@string/enterBaseCurencyHint"
+        android:id="@+id/beingConverted"/>
+    <TextView
+        android:text="TO"
+        android:layout_below="@+id/beingConverted"
+        android:textSize="15sp"
+        android:gravity="center"
+        android:id="@+id/toText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+    <AutoCompleteTextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:popupBackground="@color/colorAccent"
+        android:gravity="center_horizontal"
+        android:hint="@string/enterExportCurencyHint"
+        android:id="@+id/convertInto"
+        android:layout_margin="10dp"
+        android:layout_below="@+id/toText"
+        android:layout_alignLeft="@+id/beingConverted"
+        android:layout_alignStart="@+id/beingConverted" />
+    <EditText
+        android:layout_width="match_parent"
+        android:inputType="numberDecimal"
+        android:layout_below="@+id/convertInto"
+        android:hint="@string/enterNumberHint"
+        android:layout_margin="10dp"
+        android:gravity="center"
+        android:id="@+id/amountToConvert"
+        android:layout_height="wrap_content" />
+
+
+    <Button
+        android:layout_width="150sp"
+        android:layout_height="50sp"
+        android:text="@string/convertButtonText"
+        android:id="@+id/convertButton"
+        android:src="@drawable/wallet"
+        android:layout_margin="10dp"
+        android:layout_below="@+id/amountToConvert"
+        android:layout_centerHorizontal="true" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="="
+        android:gravity="left"
+        android:textSize="35sp"
+        android:id="@+id/equal"
+        android:layout_below="@+id/convertButton"
+        android:layout_marginLeft="15dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginBottom="15dp"
+        android:layout_toLeftOf="@+id/myResult"
+        android:layout_toStartOf="@+id/myResult" />
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Result"
+        android:gravity="center"
+        android:textSize="35sp"
+        android:id="@+id/myResult"
+        android:layout_below="@+id/convertButton"
+        android:layout_marginRight="15dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginBottom="15dp"
+        android:layout_alignLeft="@+id/convertButton"
+        android:layout_alignStart="@+id/convertButton" />
+</RelativeLayout>

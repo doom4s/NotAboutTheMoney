@@ -27,7 +27,8 @@ public class DownloadTask extends AsyncTask<String,Integer,String> {
     @Override
     protected String doInBackground(String... urls) {
         String result = "";
-        URL url;
+
+        URL url ;
         HttpURLConnection urlConnection = null;
         try{
             url = new URL(urls[0]);
@@ -36,12 +37,12 @@ public class DownloadTask extends AsyncTask<String,Integer,String> {
 
             InputStreamReader inputStreamReader = new InputStreamReader(inputStream);
             int data = inputStreamReader.read();
-
             while (data!=-1){
                 char current = (char) data;
                 result+=current;
                 data = inputStreamReader.read();
             }
+
         }catch(IOException e){e.printStackTrace();}
         return result;
     }
@@ -53,17 +54,22 @@ public class DownloadTask extends AsyncTask<String,Integer,String> {
             JSONObject jsonObject = new JSONObject(result);
             JSONArray jsonArray = new JSONArray();
             Iterator iterator = jsonObject.keys();
+
             while(iterator.hasNext()){
                 String key = (String) iterator.next();
-                jsonArray.put(jsonObject.get(key));
+                if(key!=""){
+                    jsonArray.put(jsonObject.get(key));
+                    MyCurrencyObject object = new MyCurrencyObject();
+                    object.setNameId(key);
+                    object.setFullCountryName(jsonObject.get(key).toString());
+                    MyCurrencyObjArray.addCurrencyObj(object);}
             }
+            MainActivity.countriesList.clear();
             for(int i = 0 ;i<jsonArray.length();i++){
-                MainActivity.myCurrenciesList.add(jsonArray.get(i).toString());
+                MainActivity.countriesList.add(jsonArray.get(i).toString());
             }
-            complete.asyncComplete(true);
-
-
-        } catch (JSONException e) {
+            complete.asyncComplete1(true);
+        } catch(JSONException e) {
             e.printStackTrace();
         }
 
