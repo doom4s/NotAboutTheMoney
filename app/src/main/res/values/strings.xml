@@ -2,7 +2,7 @@
     <string name="app_name">Loot</string>
     <string name="allCurrenciesUrl">https://openexchangerates.org/api/currencies.json</string>
     <string name="latestChangesCurrencies">https://openexchangerates.org/api/latest.json?app_id=</string>
-    <string name="apiID">b6012f67230047d69445d5a0489a71ae</string>
+    <string name="apiID">this would be private stuff</string>
     <string name="enterBaseCurencyHint">Enter start currency</string>
     <string name="enterExportCurencyHint">Enter end currency</string>
     <string name="enterNumberHint">Enter amount i.e.: 13.1</string>
